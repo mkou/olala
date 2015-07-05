@@ -1,6 +1,6 @@
 module Olala
   class Label < ActiveRecord::Base
-    #attr_accessible :content_fr, :content_en, :label
+    translates :content, fallback: :any
 
     def self.retrieve(label, default = nil)
       if default.nil?

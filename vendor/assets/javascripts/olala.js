@@ -18,6 +18,7 @@ var Olala = {
         Aloha.bind('aloha-editable-deactivated', function () {
           var content = Aloha.activeEditable.getContents();
           var contentId = Aloha.activeEditable.obj[0].id;
+          var locale = Aloha.activeEditable.obj.data('locale');
           var pageId = window.location.pathname;
 
           // textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
@@ -25,9 +26,10 @@ var Olala = {
             contentId = contentId.replace(/-aloha/gi, '');
           }
 
-          console.log({content: content, id: contentId, pageId: pageId});
+          console.log({content: content, id: contentId, pageId: pageId, locale: locale});
 
-          var data = {label: Aloha.activeEditable.obj.data('label')};
+          var data = { label: Aloha.activeEditable.obj.data('label')};
+          data['locale'] = locale;
           data['content'] = content;
           $.ajax({
             type: "POST",

@@ -13,8 +13,7 @@ module Olala
 
     def create
       params.permit(:label, :content)
-
-      label = Label.find_or_create_by_label params[:label]
+      label = Label.where(label: params[:label]).first_or_create
       label.content = params[:content] if params[:content]
       label.save
       render text: 'ok'

@@ -1,4 +1,5 @@
 require "olala/version"
+require "traco"
 
 module Olala
   module Controllers
@@ -34,12 +35,12 @@ module Olala
     def editable(label, default = nil, &block)
       if block_given?
         label, content = Olala::Label.retrieve(label, capture(&block))
-        return raw "<div class='editable' data-label='#{label.to_s}'>" +
+        return raw "<div class='editable' data-label='#{label.to_s}' data-locale='#{I18n.locale}'>" +
                        content.to_s +
                        '</div>'.html_safe
       else
         label, content = Olala::Label.retrieve(label, default)
-        return raw "<div class='editable' data-label='#{label.to_s}'>#{content.to_s}</div>".html_safe
+        return raw "<div class='editable' data-label='#{label.to_s}' data-locale='#{I18n.locale}'>#{content.to_s}</div>".html_safe
       end
     end
   end
